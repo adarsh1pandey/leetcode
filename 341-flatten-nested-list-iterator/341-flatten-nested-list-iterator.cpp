@@ -40,10 +40,12 @@ public:
     }
     
     int next() {
-        int ans = -1;
-        if (i < output.size())
-            ans = output[i];
-            i++;
+        // int ans = -1;
+        // if (i < output.size())
+        //     ans = output[i];
+        //     i++;
+        int ans = output.at(i);
+        i++;
         return ans;
     }
     
