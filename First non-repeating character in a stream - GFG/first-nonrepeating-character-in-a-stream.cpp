@@ -7,26 +7,26 @@ class Solution {
 	public:
 		string FirstNonRepeating(string A){
 		    // Code here
-		   vector<int> cnt(26, 0);
-		    queue<char> q;
+		    vector <int> cnt(26, 0);
+		    int pointer = 0;
 		    string ans;
 		    
 		    for (int i = 0; i < A.size(); i++)
 		    {
 		        cnt[A[i] - 'a']++;
-		        q.push(A[i] - 'a');
-		        while (cnt[q.front()] > 1 && !q.empty())
+		        while (pointer <= i && cnt[A[pointer] - 'a'] > 1)
 		        {
-		            q.pop();
+		            ++pointer;
 		        }
-		        if (q.empty())
+		        if (pointer > i)
 		        {
 		            ans.push_back('#');
 		        }
 		        else
 		        {
-		            ans.push_back(q.front() + 'a');
+		            ans.push_back(A[pointer]);
 		        }
+		        
 		    }
 		    return ans;
 		    
