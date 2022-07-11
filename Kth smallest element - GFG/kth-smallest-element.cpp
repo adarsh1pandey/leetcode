@@ -20,10 +20,10 @@ class Solution{
         for (int i = l; i <= r; i++)
         {
             maxH.push(arr[i]);
-            if (maxH.size() > k)
-            {
-                maxH.pop();
-            }
+        }
+        while (maxH.size() > k)
+        {
+            maxH.pop();
         }
         return maxH.top();
     }
