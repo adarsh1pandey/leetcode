@@ -13,9 +13,9 @@ public:
             mp[nums[i]]++;
         }
         
-        for (auto it : mp)
+        for (auto it = mp.begin(); it != mp.end(); it++)
         {
-            meanH.push({it.second, it.first});
+            meanH.push({it->second, it->first});
             
             if (meanH.size() > k)
             {
