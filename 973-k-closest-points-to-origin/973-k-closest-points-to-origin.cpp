@@ -18,8 +18,10 @@ public:
         
         while (maxH.size() > 0)
         {
-            pair<int, int> p = maxH.top().second;
-            ans.push_back({p.first, p.second});
+            vector<int> v;
+            v.push_back(maxH.top().second.first);
+            v.push_back(maxH.top().second.second);
+            ans.push_back(v);
             maxH.pop();
         }
         return ans;
