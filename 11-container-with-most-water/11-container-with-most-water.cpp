@@ -5,16 +5,17 @@ public:
         int i = 0;
         int j = n - 1;
         int ans = 0;
-        while (i <= j)
+        while (i < j)
         {
+            ans = max (ans, min(height[i], height[j]) *(j - i));
             if (height[i] < height[j])
             {
-                ans = max (ans, height[i] * (j - i));
+                
                 i++;
             }
             else
             {
-                ans = max (ans, height[j] *(j - i));
+                
                 j--;
                                
             }
