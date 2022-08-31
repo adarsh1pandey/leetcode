@@ -3,29 +3,29 @@ public:
     int largestRectangleArea(vector<int>& heights) {
         int n = heights.size();
         vector<int> left, right;
-        stack<pair<int, int>> st;
-        //nsl
+        stack <pair<int, int>> st;
+        
         for (int i = 0; i < n; i++)
         {
-            if (st.size() == 0)
+            if (st.empty())
             {
                 left.push_back(-1);
             }
-            else if (st.size() > 0 && st.top().first < heights[i])
+            else if (!st.empty() && st.top().first < heights[i])
             {
                 left.push_back(st.top().second);
             }
-            else if (st.size() > 0 && st.top().first >= heights[i])
+            else if (!st.empty() && st.top().first >= heights[i])
             {
-                while (st.size() > 0 && st.top().first >= heights[i])
+                while (!st.empty() && st.top().first >= heights[i])
                 {
                     st.pop();
                 }
-                if (st.size() == 0)
+                if (st.empty())
                 {
                     left.push_back(-1);
                 }
-                else
+                else 
                 {
                     left.push_back(st.top().second);
                 }
@@ -33,7 +33,12 @@ public:
             st.push({heights[i], i});
         }
         
-        while (!st.empty()) st.pop();
+        while (!st.empty())
+        {
+            st.pop();
+        }
+            
+        
         
         for (int i = n - 1; i >= 0; i--)
         {
@@ -41,21 +46,21 @@ public:
             {
                 right.push_back(n);
             }
-            else if (st.size() > 0 && st.top().first < heights[i])
+            else if (!st.empty() && st.top().first < heights[i])
             {
                 right.push_back(st.top().second);
             }
-            else if (st.size() > 0 && st.top().first >= heights[i])
+            else if (!st.empty() && st.top().first >= heights[i])
             {
-                while (st.size() > 0 && st.top().first >= heights[i])
+                while (!st.empty() && st.top().first >= heights[i])
                 {
                     st.pop();
                 }
-                if (st.size() == 0)
+                if (st.empty())
                 {
                     right.push_back(n);
                 }
-                else
+                else 
                 {
                     right.push_back(st.top().second);
                 }
@@ -64,12 +69,13 @@ public:
         }
         reverse(right.begin(), right.end());
         
-        int area = 0;
+        
+        int ans = 0;
+        
         for (int i = 0; i < n; i++)
         {
-             area = max(area, heights[i] * (right[i] - left[i] - 1));
+            ans = max(ans, heights[i] *(right[i] - left[i] - 1));
         }
-                        return area;
-        
+        return ans;
     }
 };
