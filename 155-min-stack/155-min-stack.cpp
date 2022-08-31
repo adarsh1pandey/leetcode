@@ -1,8 +1,6 @@
 class MinStack {
 public:
-    
     stack<int> s1, s2;
-    
     MinStack() {
         
     }
@@ -13,11 +11,12 @@ public:
             s1.push(val);
             s2.push(val);
         }
-        else
+        else 
         {
             s1.push(val);
             s2.push(min(val, s2.top()));
-        }
+        }    
+        
     }
     
     void pop() {
@@ -30,7 +29,7 @@ public:
     }
     
     int getMin() {
-        return s2.top();
+       return s2.top();
     }
 };
 
