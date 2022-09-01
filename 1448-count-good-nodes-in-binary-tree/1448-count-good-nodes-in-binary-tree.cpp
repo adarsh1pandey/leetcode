@@ -13,22 +13,22 @@ class Solution {
 public:
     int goodNodes(TreeNode* root) {
         int count = 0;
-        if (root == NULL) return 0;
+        if (root == NULL)
+            return 0;
         helper(root, count, root->val);
         
         return count;
     }
-    void helper(TreeNode* root, int &count, int maxele)
+    void helper(TreeNode* root, int &count, int maxforthisstep)
     {
-        if (root == NULL)
+        if (root == NULL) 
             return;
-        if (root->val >= maxele)
+        if (root->val >= maxforthisstep)
         {
             count++;
-            maxele = root->val;
+            maxforthisstep = root->val;
         }
-        helper(root->left, count, maxele);
-        helper(root->right, count, maxele);
-            
+        helper(root->left, count, maxforthisstep);
+        helper(root->right, count, maxforthisstep);
     }
 };
