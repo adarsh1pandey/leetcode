@@ -1,6 +1,6 @@
 class Solution {
 public:
-    long hours(vector<int>&piles, int h, int n)
+   long hours(vector<int>&piles, int h, int n)
     {
         long minH=0;
         for(int i=0;i<n;i++)    minH += piles[i]/h + ((piles[i]%h)!=0);
