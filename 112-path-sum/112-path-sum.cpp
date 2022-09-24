@@ -11,38 +11,35 @@
  */
 class Solution {
 public:
-    bool ans = false;
-    
-    void dfs(TreeNode* root, int targetSum, int sum)
+    bool valu = false;
+    void dfs(TreeNode* &root, int target, int sum)
     {
-        if (!root)
+        if (root == NULL)
+        {
             return;
+        }
         
-        if(root->left == NULL && root->right == NULL)
+        if (root->left == NULL && root->right == NULL)
         {
             sum += root->val;
-            if (sum == targetSum)
+            if (sum == target)
             {
-                ans = true;
+                valu = true;
             }
-            return;   
+            return;
         }
-        if (ans)
-        {
-             return;
-        }
+        if (valu)
+            return;
         sum += root->val;
-        dfs(root->left, targetSum, sum);
-        dfs(root->right, targetSum, sum);
+        dfs(root->left, target, sum);
+        dfs(root->right, target, sum);
+        
     }
-    
     
     bool hasPathSum(TreeNode* root, int targetSum) {
         if (root == NULL)
-        {
             return false;
-        }
         dfs(root, targetSum, 0);
-        return ans;
+        return valu;
     }
 };
