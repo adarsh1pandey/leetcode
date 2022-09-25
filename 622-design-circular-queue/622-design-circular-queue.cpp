@@ -2,18 +2,17 @@ class MyCircularQueue {
 public:
     int front;
     int rear;
+    int *hq;
     int size;
-    int *dq;
-    
     MyCircularQueue(int k) {
         front = -1;
         rear = -1;
-        dq = new int[k];
+        hq = new int[k];
         size = k;
     }
     
     bool enQueue(int value) {
-        if(isFull())
+        if (isFull())
         {
             return false;
         }
@@ -22,7 +21,7 @@ public:
             front++;
         }
         rear = (rear + 1) % size;
-        dq[rear] = value;
+        hq[rear] = value;
         return true;
     }
     
@@ -47,8 +46,7 @@ public:
         {
             return -1;
         }
-        return dq[front];
-        
+        return hq[front];
     }
     
     int Rear() {
@@ -56,7 +54,9 @@ public:
         {
             return -1;
         }
-        return dq[rear];
+       
+        return hq[rear];
+        
     }
     
     bool isEmpty() {
