@@ -47,27 +47,48 @@ public:
             temp = temp->next;
         }
         
-        unordered_map<Node*, Node*> um;
+        // cloneNode add between original lists
         
         Node* originalNode = head;
         Node* cloneNode = cloneHead;
-        while (originalNode != NULL && cloneNode != NULL)
+        
+        while(originalNode != NULL && cloneNode != NULL)
         {
-            um[originalNode] = cloneNode;
-            originalNode = originalNode->next;
-            cloneNode = cloneNode->next;
+            Node* next = originalNode->next;
+            originalNode->next = cloneNode;
+            originalNode = next;
+            
+            next = cloneNode->next;
+            cloneNode->next = originalNode;
+            cloneNode = next;
         }
+        //step 3: random pointer copy 
+        
+        temp = head;
+        while(temp != NULL)
+        {
+            if (temp != NULL)
+            {
+                temp->next->random = temp->random ? temp->random->next :temp->random;
+            }
+            temp = temp->next->next;
+        }
+        
+        // step 4: revert changes done in step 2
         
         originalNode = head;
         cloneNode = cloneHead;
-        while( originalNode != NULL && cloneNode != NULL)
+        while (originalNode != NULL && cloneNode != NULL)
         {
-            cloneNode->random = um[originalNode->random];
-            originalNode = originalNode->next;
+            originalNode->next = cloneNode->next;
+            originalNode = cloneNode->next;
+            if (originalNode != NULL)
+            {
+                cloneNode->next = originalNode->next;
+            }
             cloneNode = cloneNode->next;
         }
+        
         return cloneHead;
-        
-        
     }
 };
