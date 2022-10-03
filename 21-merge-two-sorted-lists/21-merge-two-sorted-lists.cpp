@@ -19,34 +19,40 @@ public:
         {
             return list1;
         }
-        ListNode *a = list1;
-        ListNode *b = list2;
-        ListNode *dummy = new ListNode(-1);
-        ListNode *prev = dummy;
+        ListNode* head = NULL;
+        ListNode* tail = NULL;
         
-        while (a && b)
+        if (list1->val <= list2->val)
         {
-            if (a->val < b->val)
+            head = tail = list1;
+            list1 = list1->next;
+        }
+        else
+        {
+            head = tail = list2;
+            list2 = list2->next;
+        }
+        while (list1 != NULL && list2 != NULL)
+        {
+            if (list1->val <= list2->val)
             {
-                prev->next = a;
-                a = a->next;
-                prev = prev->next;
+                tail->next = list1;
+                tail = list1;
+                list1 = list1->next;
             }
             else
             {
-                prev->next = b;
-                b = b->next;
-                prev = prev->next;
+                tail->next = list2;
+                tail = list2;
+                list2 = list2->next;
             }
         }
-        if (a)
-        {
-            prev->next = a;
-        }
-        if (b)
-        {
-            prev->next = b;
-        }
-        return dummy->next;
+        if (list1)
+            tail->next = list1;
+        if (list2)
+            tail->next = list2;
+        
+        
+        return head;
     }
 };
