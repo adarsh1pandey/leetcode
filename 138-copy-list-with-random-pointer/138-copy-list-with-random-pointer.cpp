@@ -16,7 +16,6 @@ public:
 
 class Solution {
 public:
-    // insert at tail 
     void insertAtTail(Node* &head, Node* &tail, int data)
     {
         Node* newNode = new Node(data);
@@ -24,7 +23,6 @@ public:
         {
             head = newNode;
             tail = newNode;
-            return;
         }
         else
         {
@@ -33,40 +31,37 @@ public:
         }
     }
     Node* copyRandomList(Node* head) {
-        // 
         Node* cloneHead = NULL;
         Node* cloneTail = NULL;
         
         Node* temp = head;
-        
-        while (temp != NULL)
+        while (temp)
         {
             insertAtTail(cloneHead, cloneTail, temp->val);
             temp = temp->next;
         }
         
-        unordered_map<Node*, Node*> ump;
+        unordered_map<Node*, Node*> oldToNew;
         
-        Node* originalNode = head;
         Node* cloneNode = cloneHead;
+        Node* originalNode = head;
         
-        while (originalNode != NULL && cloneNode != NULL)
+        while (cloneNode != NULL && originalNode != NULL)
         {
-            ump[originalNode] = cloneNode;
+            oldToNew[originalNode] = cloneNode;
             originalNode = originalNode->next;
             cloneNode = cloneNode->next;
         }
-        originalNode = head;
+        
         cloneNode = cloneHead;
+        originalNode = head;
         while (originalNode != NULL)
         {
-            cloneNode->random = ump[originalNode->random];
-            originalNode = originalNode->next;
+            cloneNode->random = oldToNew[originalNode->random];
             cloneNode = cloneNode->next;
+            originalNode = originalNode->next;
         }
         return cloneHead;
-        
-        
-        
+  
     }
 };
