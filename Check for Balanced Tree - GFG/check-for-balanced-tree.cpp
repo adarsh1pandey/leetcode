@@ -104,23 +104,23 @@ struct Node
 class Solution{
     public:
     //Function to check whether a binary tree is balanced or not.
-    int height(Node* root)
+    bool isBalanced(Node *root)
+    {
+        //  Your Code here
+        return isValid(root) != -1;
+    }
+    int isValid(Node* root)
     {
         if (root == NULL)
         {
             return 0;
         }
-        return 1 + max(height(root->left), height(root->right));
-    }
-    bool isBalanced(Node *root)
-    {
-        //  Your Code here
-        if (root == NULL)
-            return true;
-        int lh = height(root->left);
-        int rh = height(root->right);
-        
-        return (abs(lh - rh) <= 1 && isBalanced(root->left) && isBalanced(root->right));
+        int lh = isValid(root->left);
+        if (lh == -1) return -1;
+        int rh = isValid(root->right);
+        if (rh == -1) return -1;
+        if (abs(lh - rh) > 1) return -1;
+        return 1 + max(lh, rh);
     }
 };
 
